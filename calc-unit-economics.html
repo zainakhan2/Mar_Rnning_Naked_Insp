@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Unit Economics Calculator — StrideHer GTM</title><link rel="stylesheet" href="_shared.css"></head><body><header><div class="header-inner">
+<a href="https://zainakhan2.github.io/Retail_Ventures_Command_Center/" class="cc-link">🏠 Command Center</a><a href="index.html" class="logo">Stride<span>Her</span> GTM</a>
+<nav>
+<a href="index.html" class="">Dashboard</a>
+<a href="projects.html" class="">Projects</a>
+<a href="tools.html" class="">Tools</a>
+<a href="gaps.html" class="">Gaps</a>
+<span class="nav-divider"></span>
+<a href="articles.html" class="">Blog</a>
+<a href="calculators.html" class="active">Calculators</a>
+<a href="shopify.html" class="">Shopify</a>
+<a href="email-flows.html">Emails</a><a href="executive-summary.html">Summary</a></nav></div></header>
+<div class="container"><div class="breadcrumb"><a href="index.html">Dashboard</a> → <a href="calculators.html">Calculators</a> → Unit Economics</div>
+<div class="section">
+<div class="section-title">💰 Unit Economics Calculator</div>
+<div class="section-sub">Adjust any input to see real-time margin calculations across Shopify D2C and Amazon FBA channels.</div>
+<div class="calc-card"><h3>📝 Inputs</h3>
+<div class="input-group"><label>Retail Price ($)</label><input type="number" id="price" value="34.99" step="0.01" oninput="calc()"></div>
+<div class="input-group"><label>COGS per unit ($)</label><input type="number" id="cogs" value="6.00" step="0.01" oninput="calc()"></div>
+<div class="input-group"><label>Inbound freight/unit ($)</label><input type="number" id="freight" value="2.00" step="0.01" oninput="calc()"></div>
+<div class="input-group"><label>Packaging per unit ($)</label><input type="number" id="pkg" value="1.25" step="0.01" oninput="calc()"></div>
+<div class="input-group"><label>Outbound shipping ($)</label><input type="number" id="ship" value="4.50" step="0.01" oninput="calc()"></div>
+<div class="input-group"><label>Payment processing (%)</label><input type="number" id="proc" value="2.9" step="0.1" oninput="calc()"></div>
+<div class="input-group"><label>Amazon referral fee (%)</label><input type="number" id="amzref" value="15" step="0.5" oninput="calc()"></div>
+<div class="input-group"><label>Amazon FBA fee ($)</label><input type="number" id="fba" value="3.50" step="0.1" oninput="calc()"></div>
+</div>
+<div class="result-grid" id="results"></div>
+<div class="calc-card"><h3>📊 Margin Waterfall — Shopify D2C</h3><div id="waterfall"></div></div>
+</div></div>
+<script>
+function calc(){
+  const p=+document.getElementById('price').value, c=+document.getElementById('cogs').value,
+    fr=+document.getElementById('freight').value, pk=+document.getElementById('pkg').value,
+    sh=+document.getElementById('ship').value, pr=+document.getElementById('proc').value/100,
+    ar=+document.getElementById('amzref').value/100, fb=+document.getElementById('fba').value;
+  const landed=c+fr+pk;
+  const shopProc=p*pr+0.30;
+  const shopMargin=p-landed-sh-shopProc;
+  const shopPct=(shopMargin/p*100);
+  const amzFees=p*ar+fb;
+  const amzMargin=p-landed-amzFees;
+  const amzPct=(amzMargin/p*100);
+  const be=Math.ceil(800/shopMargin);
+  document.getElementById('results').innerHTML=`
+    <div class="result-box"><div class="label">Landed Cost</div><div class="value">$${landed.toFixed(2)}</div><div class="sub">COGS + freight + packaging</div></div>
+    <div class="result-box"><div class="label">Shopify Margin</div><div class="value ${shopPct<20?'neg':''}">$${shopMargin.toFixed(2)}</div><div class="sub">${shopPct.toFixed(1)}% of retail</div></div>
+    <div class="result-box"><div class="label">Amazon Margin</div><div class="value ${amzPct<15?'neg':''}">$${amzMargin.toFixed(2)}</div><div class="sub">${amzPct.toFixed(1)}% of retail</div></div>
+    <div class="result-box"><div class="label">Breakeven</div><div class="value">${be}</div><div class="sub">units/month (at $800 fixed costs)</div></div>`;
+  const items=[['Retail Price',p,'var(--ocean)'],['COGS',-c,'var(--rose)'],['Freight',-fr,'var(--rose)'],['Packaging',-pk,'var(--rose)'],['Shipping',-sh,'var(--rose)'],['Processing',-shopProc,'var(--rose)'],['NET MARGIN',shopMargin,shopMargin>0?'var(--sage)':'var(--rose)']];
+  const maxW=p;
+  document.getElementById('waterfall').innerHTML=items.map(([l,v,col])=>{
+    const w=Math.abs(v)/maxW*100;
+    return`<div class="wf-row"><span class="wf-label">${l}</span><span class="wf-bar" style="width:${w}%;background:${col}"></span><span class="wf-val">${v>=0?'$':'−$'}${Math.abs(v).toFixed(2)}</span></div>`;
+  }).join('');
+}
+calc();
+</script><footer><div class="container"><a href="https://zainakhan2.github.io/Retail_Ventures_Command_Center/">🏠 Retail Ventures Command Center</a> &middot; 
+<a href="index.html"><strong>StrideHer</strong> GTM</a> &middot; 22 Projects &middot; 285 Tasks &middot; 69 Deliverables &middot;
+<a href="articles.html">Blog</a> &middot; <a href="calculators.html">Calculators</a> &middot; <a href="shopify.html">Shopify Pages</a>
+ &middot;
+<a href="financials.html">Financials</a> &middot; <a href="projections.html">Projections</a> &middot; <a href="competitors.html">Competitors</a>
+</div></footer></body></html>

@@ -1,124 +1,46 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Dashboard — StrideHer GTM</title><style>
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500&display=swap');
-:root {
-  --rose: #C07C7C; --sage: #7A9A7E; --ocean: #3D5A80; --navy: #1B2A4A;
-  --black: #1B1B1B; --white: #FFFFFF; --gray: #F2F2F2; --mid: #E8E8E8;
-  --text: #2D2D2D; --muted: #6B7280; --card-shadow: 0 2px 16px rgba(27,42,74,0.07);
-}
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family:'DM Sans',sans-serif; color:var(--text); background:#FAFAFA; line-height:1.65; }
-a { color:var(--ocean); text-decoration:none; transition:color .2s; }
-a:hover { color:var(--rose); }
-.container { max-width:1200px; margin:0 auto; padding:0 24px; }
-
-/* HEADER */
-header { background:var(--navy); color:white; padding:0; position:sticky; top:0; z-index:100; }
-.header-inner { display:flex; align-items:center; justify-content:space-between; padding:16px 24px; max-width:1200px; margin:0 auto; }
-.logo { font-family:'Plus Jakarta Sans',sans-serif; font-weight:800; font-size:22px; color:white; letter-spacing:-0.5px; }
-.logo span { color:var(--rose); }
-nav a { color:rgba(255,255,255,.75); margin-left:28px; font-size:14px; font-weight:500; transition:color .2s; }
-nav a:hover { color:white; }
-nav a.active { color:white; border-bottom:2px solid var(--rose); padding-bottom:2px; }
-
-/* HERO */
-.hero { background:linear-gradient(135deg, var(--navy) 0%, var(--ocean) 100%); color:white; padding:64px 0 56px; }
-.hero h1 { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(28px,4vw,44px); font-weight:800; letter-spacing:-1px; margin-bottom:12px; }
-.hero h1 span { color:var(--rose); }
-.hero p { font-size:17px; color:rgba(255,255,255,.8); max-width:680px; line-height:1.6; }
-.hero-stats { display:flex; gap:40px; margin-top:32px; flex-wrap:wrap; }
-.hero-stat { text-align:center; }
-.hero-stat .num { font-family:'Plus Jakarta Sans',sans-serif; font-size:32px; font-weight:800; color:var(--rose); }
-.hero-stat .label { font-size:12px; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,.6); margin-top:2px; }
-
-/* CARDS */
-.grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(340px, 1fr)); gap:20px; margin:32px 0; }
-.card { background:white; border-radius:12px; padding:24px 28px; box-shadow:var(--card-shadow); border-left:4px solid var(--ocean); transition:transform .2s, box-shadow .2s; }
-.card:hover { transform:translateY(-3px); box-shadow:0 6px 24px rgba(27,42,74,0.12); }
-.card.complete { border-left-color:var(--sage); }
-.card.tool { border-left-color:var(--rose); }
-.card.gap { border-left-color:#E65100; }
-.card h3 { font-family:'Plus Jakarta Sans',sans-serif; font-size:16px; font-weight:700; margin-bottom:6px; color:var(--navy); }
-.card .meta { font-size:13px; color:var(--muted); margin-bottom:10px; }
-.card .desc { font-size:14px; color:var(--text); line-height:1.55; }
-.card .badge { display:inline-block; font-size:11px; font-weight:600; padding:3px 10px; border-radius:20px; margin-top:10px; }
-.badge-complete { background:#E2EFDA; color:#2E7D32; }
-.badge-tool { background:#FCE4EC; color:#C62828; }
-.badge-gap { background:#FFF3E0; color:#E65100; }
-.card .files { margin-top:14px; }
-.card .files a { display:inline-flex; align-items:center; gap:5px; font-size:13px; color:var(--ocean); background:var(--gray); padding:5px 12px; border-radius:6px; margin:3px 4px 3px 0; transition:background .2s; }
-.card .files a:hover { background:var(--mid); color:var(--navy); }
-.card .files a::before { content:'📥'; font-size:12px; }
-
-/* SECTION */
-.section { padding:40px 0; }
-.section-title { font-family:'Plus Jakarta Sans',sans-serif; font-size:24px; font-weight:800; color:var(--navy); margin-bottom:6px; letter-spacing:-0.5px; }
-.section-sub { font-size:14px; color:var(--muted); margin-bottom:24px; }
-
-/* PROJECT PAGE */
-.breadcrumb { font-size:13px; color:var(--muted); padding:16px 0 0; }
-.breadcrumb a { color:var(--ocean); }
-.project-hero { background:white; padding:32px 0 28px; border-bottom:1px solid var(--mid); }
-.project-hero h1 { font-family:'Plus Jakarta Sans',sans-serif; font-size:clamp(22px,3vw,32px); font-weight:800; color:var(--navy); margin-bottom:8px; }
-.project-hero .pmeta { font-size:14px; color:var(--muted); }
-.sub-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(300px, 1fr)); gap:16px; margin:24px 0; }
-.sub-card { background:white; border-radius:10px; padding:20px 24px; box-shadow:var(--card-shadow); border-top:3px solid var(--sage); }
-.sub-card h4 { font-family:'Plus Jakarta Sans',sans-serif; font-size:15px; font-weight:700; color:var(--navy); margin-bottom:6px; }
-.sub-card .tasks { font-size:13px; color:var(--muted); margin-bottom:8px; }
-.sub-card ul { list-style:none; padding:0; }
-.sub-card ul li { font-size:13px; padding:4px 0; border-bottom:1px solid var(--gray); color:var(--text); }
-.sub-card ul li:last-child { border:none; }
-.file-btn { display:inline-flex; align-items:center; gap:6px; font-size:14px; color:white; background:var(--ocean); padding:8px 18px; border-radius:8px; margin:6px 6px 6px 0; transition:background .2s; font-weight:500; }
-.file-btn:hover { background:var(--navy); color:white; }
-.file-btn::before { content:'📥'; }
-.gap-sheet { display:inline-flex; align-items:center; gap:5px; font-size:12px; background:#FFF3E0; color:#E65100; padding:3px 10px; border-radius:12px; margin:4px 2px; font-weight:600; }
-
-/* FOOTER */
-footer { background:var(--navy); color:rgba(255,255,255,.6); padding:32px 0; margin-top:48px; text-align:center; font-size:13px; }
-footer strong { color:white; }
-
-/* TABLE */
-.tbl { width:100%; border-collapse:collapse; margin:20px 0; background:white; border-radius:10px; overflow:hidden; box-shadow:var(--card-shadow); }
-.tbl th { background:var(--navy); color:white; font-family:'Plus Jakarta Sans',sans-serif; font-size:13px; font-weight:600; padding:12px 16px; text-align:left; }
-.tbl td { padding:10px 16px; font-size:13px; border-bottom:1px solid var(--gray); }
-.tbl tr:nth-child(even) td { background:var(--gray); }
-.tbl .status { font-weight:600; color:#2E7D32; }
-
-@media(max-width:768px) {
-  .grid,.sub-grid { grid-template-columns:1fr; }
-  .hero-stats { gap:20px; }
-  nav { display:none; }
-}
-</style></head><body><header><div class="header-inner"><a href="index.html" class="logo">Stride<span>Her</span> GTM</a><nav><a href="index.html" class="active">Dashboard</a><a href="projects.html" class="">Projects</a><a href="tools.html" class="">Tools</a><a href="gaps.html" class="">Gaps</a></nav></div></header>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Dashboard — StrideHer GTM</title><link rel="stylesheet" href="_shared.css"></head><body><header><div class="header-inner">
+<a href="https://zainakhan2.github.io/Retail_Ventures_Command_Center/" class="cc-link">🏠 Command Center</a><a href="index.html" class="logo">Stride<span>Her</span> GTM</a>
+<nav>
+<a href="index.html" class="active">Dashboard</a>
+<a href="projects.html" class="">Projects</a>
+<a href="tools.html" class="">Tools</a>
+<a href="gaps.html" class="">Gaps</a>
+<span class="nav-divider"></span>
+<a href="articles.html" class="">Blog</a>
+<a href="calculators.html" class="">Calculators</a>
+<a href="shopify.html" class="">Shopify</a>
+<a href="email-flows.html">Emails</a><a href="executive-summary.html">Summary</a></nav></div></header>
 <div class="hero"><div class="container">
-<h1>Stride<span>Her</span> Complete GTM Package</h1>
-<p>The first running belt designed for women's bodies. $34.99 retail. $10K bootstrap budget. 285 tasks across 22 projects — from market research to 3-year vision. Every task documented, every gap remediated, every file ready to execute.</p>
-<div class="hero-stats">
-<div class="hero-stat"><div class="num">285</div><div class="label">Core Tasks</div></div>
-<div class="hero-stat"><div class="num">22</div><div class="label">Projects</div></div>
-<div class="hero-stat"><div class="num">69</div><div class="label">Deliverables</div></div>
-<div class="hero-stat"><div class="num">22</div><div class="label">Gaps Remediated</div></div>
-<div class="hero-stat"><div class="num">20</div><div class="label">Risks Mapped</div></div>
-<div class="hero-stat"><div class="num">35</div><div class="label">Dependencies</div></div>
-</div></div></div>
-
+<h1>Stride<em>Her</em> Complete GTM Package</h1>
+<p>The first running belt designed for women's bodies. $34.99 retail. $10K bootstrap budget. 285 tasks across 22 projects — every task documented, every gap remediated, every file ready to execute.</p>
+<div style="display:flex;gap:32px;margin-top:28px;flex-wrap:wrap">
+<div style="text-align:center"><div style="font-family:var(--heading);font-size:28px;font-weight:800;color:var(--rose)">285</div><div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5)">Tasks</div></div>
+<div style="text-align:center"><div style="font-family:var(--heading);font-size:28px;font-weight:800;color:var(--rose)">24</div><div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5)">Projects</div></div>
+<div style="text-align:center"><div style="font-family:var(--heading);font-size:28px;font-weight:800;color:var(--rose)">71</div><div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5)">Files</div></div>
+<div style="text-align:center"><div style="font-family:var(--heading);font-size:28px;font-weight:800;color:var(--rose)">6</div><div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5)">Blog Articles</div></div>
+<div style="text-align:center"><div style="font-family:var(--heading);font-size:28px;font-weight:800;color:var(--rose)">3</div><div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5)">Calculators</div></div>
+<div style="text-align:center"><div style="font-family:var(--heading);font-size:28px;font-weight:800;color:var(--rose)">8</div><div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.5)">Shopify Pages</div></div>
+<a href="content-calendar.html" class="card" style="text-decoration:none;color:inherit;border-left-color:var(--rose)"><h3>📱 30-Day Content Calendar</h3><div class="desc">Every post for Month 1: concept, caption, hashtags, time. Batch-produce in one 5-hour session.</div></a>
+<a href="video-scripts.html" class="card" style="text-decoration:none;color:inherit;border-left-color:var(--ocean)"><h3>🎬 Founder Video Scripts</h3><div class="desc">5 ready-to-read scripts for phone camera. Product demo, founder story, tutorial, unboxing, FAQ.</div></a></div></div></div>
 <div class="container">
 <div class="section">
 <div class="section-title">📦 Download Everything</div>
-<div class="section-sub">One ZIP file containing all 69 workbooks — the complete GTM package.</div>
-<a href="files/StrideHer_Complete_GTM_Package.zip" class="file-btn" style="font-size:16px;padding:12px 28px;">📦 Download Complete Package (1.9 MB)</a>
-<a href="files/Running_Belt_GTM_Master_Tracker_UPDATED.xlsx" class="file-btn" style="background:var(--sage);">📊 Master Tracker</a>
-<a href="files/GTM_Comprehensive_Gap_Analysis.xlsx" class="file-btn" style="background:var(--rose);">🔍 Gap Analysis</a>
+<a href="files/StrideHer_Complete_GTM_Package.zip" class="btn btn-primary" style="margin-right:8px">📦 Complete Package (1.9 MB)</a>
+<a href="files/Running_Belt_GTM_Master_Tracker_UPDATED.xlsx" class="btn btn-sage">📊 Master Tracker</a>
+<a href="files/GTM_Comprehensive_Gap_Analysis.xlsx" class="btn btn-rose" style="margin-left:8px">🔍 Gap Analysis</a>
 </div>
-
 <div class="section">
-<div class="section-title">🎯 Core GTM Projects (P0–P12)</div>
-<div class="section-sub">285 tasks across 13 projects and 56 subprojects. Every phase from research to sustainability.</div>
-<div class="grid"><a href="p0.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P0: Market Research & Validation</h3><div class="meta">34 tasks | 7 subprojects</div><div class="desc">Deep competitive intelligence, customer research, product concept, supplier scouting, financial feasibility, niche validation.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P0A_Competitive_Intelligence_Report.xlsx">P0A</a> <a href="files/P0B_Target_Customer_Research.xlsx">P0B</a> <a href="files/P0C_Product_Concept_Development.xlsx">P0C</a> <a href="files/P0D_Supplier_Scouting.xlsx">P0D</a> <a href="files/P0E_Financial_Feasibility.xlsx">P0E</a> <a href="files/P0F_Niche_Validation.xlsx">P0F</a> <a href="files/P0G_Competitive_Intelligence_Deep_Dives.xlsx">P0G</a></div></a><a href="p1.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P1: Brand Development & Identity</h3><div class="meta">26 tasks | 6 subprojects</div><div class="desc">Naming, trademark, visual identity, brand story, photography guidelines, pre-launch community.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P1A_Brand_Naming_Trademark.xlsx">P1A</a> <a href="files/P1B_Visual_Identity_Logo.xlsx">P1B</a> <a href="files/P1C_Brand_Story_Messaging.xlsx">P1C</a> <a href="files/P1D_Brand_Photography_Visual_Assets.xlsx">P1D</a> <a href="files/P1E_PreLaunch_Community_Building.xlsx">P1E</a> <a href="files/P1_Critical_Audit_Gap_Analysis.xlsx">P1-Audit</a></div></a><a href="p2.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P2: Product Design & Engineering</h3><div class="meta">26 tasks | 5 subprojects</div><div class="desc">Architecture, prototyping, packaging, size guide, quality standards.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P2A_Product_Architecture_Specifications.xlsx">P2A</a> <a href="files/P2B_Prototyping_Sample_Development.xlsx">P2B</a> <a href="files/P2C_Packaging_Unboxing_Design.xlsx">P2C</a> <a href="files/P2D_Size_Guide_Product_Documentation.xlsx">P2D</a> <a href="files/P2E_Quality_Standards_Testing_Protocols.xlsx">P2E</a></div></a><a href="p3.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P3: Manufacturing & Production</h3><div class="meta">22 tasks | 4 subprojects</div><div class="desc">Production planning, QC, shipping logistics, reorder management.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P3A_Production_Planning_Order_Placement.xlsx">P3A</a> <a href="files/P3B_Production_Quality_Control_Approval.xlsx">P3B</a> <a href="files/P3C_Shipping_Logistics.xlsx">P3C</a> <a href="files/P3D_Reorder_Planning_Inventory_Management.xlsx">P3D</a></div></a><a href="p4.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P4: Digital Infrastructure</h3><div class="meta">28 tasks | 5 subprojects</div><div class="desc">Shopify, Klaviyo email, analytics, SEO, Amazon marketplace.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P4A_Shopify_Store_Setup_Configuration.xlsx">P4A</a> <a href="files/P4B_Email_Marketing_Automation.xlsx">P4B</a> <a href="files/P4C_Analytics_Tracking_Setup.xlsx">P4C</a> <a href="files/P4D_SEO_Organic_Traffic.xlsx">P4D</a> <a href="files/P4E_Amazon_Marketplace_Setup.xlsx">P4E</a></div></a><a href="p5.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P5: Content & Influencer</h3><div class="meta">26 tasks | 5 subprojects</div><div class="desc">Influencer seeding, content strategy, events, PR, ambassador program.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P5A_Influencer_Seeding_Program.xlsx">P5A</a> <a href="files/P5B_Content_Strategy_Social_Media.xlsx">P5B</a> <a href="files/P5C_Running_Events_Local_Marketing.xlsx">P5C</a> <a href="files/P5D_PR_Media_Outreach.xlsx">P5D</a> <a href="files/P5E_Referral_Ambassador_Program.xlsx">P5E</a></div></a><a href="p6.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P6: Launch & Paid Acquisition</h3><div class="meta">25 tasks | 5 subprojects</div><div class="desc">Pre-launch campaign, launch week, Meta ads, Google ads, optimization.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P6A_Pre_Launch_Campaign.xlsx">P6A</a> <a href="files/P6B_Launch_Week_Execution.xlsx">P6B</a> <a href="files/P6C_Meta_Ads.xlsx">P6C</a> <a href="files/P6D_Google_Ads.xlsx">P6D</a> <a href="files/P6E_Performance_Optimization.xlsx">P6E</a></div></a><a href="p7.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P7: Financial Operations</h3><div class="meta">18 tasks | 4 subprojects</div><div class="desc">Business setup, financial planning, payment/international, inventory.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P7A_Business_Setup_Accounting.xlsx">P7A</a> <a href="files/P7B_Financial_Planning.xlsx">P7B</a> <a href="files/P7C_Payment_International.xlsx">P7C</a> <a href="files/P7D_Inventory_Financial.xlsx">P7D</a></div></a><a href="p8.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P8: Legal, Compliance & IP</h3><div class="meta">16 tasks | 4 subprojects</div><div class="desc">Business structure, IP protection, e-commerce compliance, contracts.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P8A_Business_Structure.xlsx">P8A</a> <a href="files/P8B_IP_Protection.xlsx">P8B</a> <a href="files/P8C_Ecommerce_Compliance.xlsx">P8C</a> <a href="files/P8D_Contracts_Agreements.xlsx">P8D</a></div></a><a href="p9.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P9: Customer Experience</h3><div class="meta">18 tasks | 4 subprojects</div><div class="desc">Support (20 templates), reviews, retention/loyalty, returns.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P9A_Customer_Support.xlsx">P9A</a> <a href="files/P9B_Reviews_Feedback.xlsx">P9B</a> <a href="files/P9C_Retention_Loyalty.xlsx">P9C</a> <a href="files/P9D_Returns_Management.xlsx">P9D</a></div></a><a href="p10.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P10: Supply Chain & Fulfillment</h3><div class="meta">16 tasks | 3 subprojects</div><div class="desc">Home fulfillment, international shipping, inventory/packaging.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P10A_Home_Fulfillment.xlsx">P10A</a> <a href="files/P10B_Intl_Shipping_3PL.xlsx">P10B</a> <a href="files/P10CD_Inventory_Packaging.xlsx">P10CD</a></div></a><a href="p11.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P11: Growth & Scaling</h3><div class="meta">18 tasks | 3 subprojects</div><div class="desc">Product expansion, channel expansion, international + team scaling.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P11A_Product_Line_Expansion.xlsx">P11A</a> <a href="files/P11B_Channel_Expansion.xlsx">P11B</a> <a href="files/P11CD_Intl_Team_Scaling.xlsx">P11CD</a></div></a><a href="p12.html" class="card complete" style="text-decoration:none;color:inherit"><h3>P12: Sustainability & Brand Purpose</h3><div class="meta">12 tasks | 1 workbook</div><div class="desc">Sustainable materials, brand purpose, charitable giving, 3-year vision.</div><span class="badge badge-complete">✓ Complete</span><div class="files"><a href="files/P12_Sustainability_Purpose.xlsx">P12</a></div></a></div>
-</div>
-
-<div class="section">
-<div class="section-title">🛠️ Execution & Operational Tools (P13–P22)</div>
-<div class="section-sub">10 ready-to-use tools that accelerate execution: copy deck, trackers, scenarios, risks, dependencies, and more.</div>
-<div class="grid"><div class="card tool"><h3>P13: Founder Quick-Start Guide</h3><div class="desc">Week-by-week execution calendar, Weeks -4 to Week 12, 4 phases + ongoing rituals.</div><span class="badge badge-tool">Execution Tool</span><div class="files"><a href="files/P13_Founder_QuickStart_Guide.xlsx">P13</a></div></div><div class="card tool"><h3>P14: Ready-to-Paste Copy Deck</h3><div class="desc">Shopify product page, 9 Klaviyo emails, Meta/Google ad copy, Amazon listing, wholesale one-sheet, support templates.</div><span class="badge badge-tool">Execution Tool</span><div class="files"><a href="files/P14_CopyDeck.xlsx">P14</a></div></div><div class="card tool"><h3>P15: Live Budget & KPI Tracker</h3><div class="desc">15 KPIs x 12 weeks with formulas, budget vs actual (9 categories x 6 months), cash position tracker.</div><span class="badge badge-tool">Execution Tool</span><div class="files"><a href="files/P15_Budget_KPI_Tracker.xlsx">P15</a></div></div><div class="card tool"><h3>P16: Scenario Planning</h3><div class="desc">Pessimistic (50%), moderate (baseline), optimistic (150%) 12-month projections with action plans.</div><span class="badge badge-tool">Execution Tool</span><div class="files"><a href="files/P16_Scenario_Planning.xlsx">P16</a></div></div><div class="card tool"><h3>P17: Risk Register</h3><div class="desc">20 risks on 5x5 probability x impact matrix with full mitigation plans.</div><span class="badge badge-tool">Execution Tool</span><div class="files"><a href="files/P17_Risk_Register.xlsx">P17</a></div></div><div class="card tool"><h3>P18: Dependency Map</h3><div class="desc">35 critical-path dependencies: 13 hard blockers, 20 soft, 2 automatic.</div><span class="badge badge-tool">Execution Tool</span><div class="files"><a href="files/P18_Dependency_Map.xlsx">P18</a></div></div><div class="card tool"><h3>P19: Investor/Advisor One-Pager</h3><div class="desc">Business summary for mentors, investors, or advisors.</div><span class="badge badge-tool">Execution Tool</span><div class="files"><a href="files/P19_Investor_Advisor_OnePager.xlsx">P19</a></div></div><div class="card tool"><h3>P20: Supplier RFQ Email Pack</h3><div class="desc">5-message Alibaba sequence + negotiation tips + 6 red flags.</div><span class="badge badge-tool">Execution Tool</span><div class="files"><a href="files/P20_Supplier_RFQ_Pack.xlsx">P20</a></div></div><div class="card tool"><h3>P21: Visual Brand Board</h3><div class="desc">Color palette, typography, brand voice, photography style, logo usage rules.</div><span class="badge badge-tool">Execution Tool</span><div class="files"><a href="files/P21_Visual_Brand_Board.xlsx">P21</a></div></div><div class="card tool"><h3>P22: Annual Operations Calendar</h3><div class="desc">12-month wall calendar with ~40 recurring tasks by frequency.</div><span class="badge badge-tool">Execution Tool</span><div class="files"><a href="files/P22_Annual_Operations_Calendar.xlsx">P22</a></div></div></div>
-</div>
-</div><footer><div class="container"><strong>StrideHer</strong> Complete Go-To-Market Package &middot; 22 Projects &middot; 285 Tasks &middot; 69 Deliverables &middot; Run Your Way. 🏃‍♀️</div></footer></body></html>
+<div class="section-title">Quick Navigation</div>
+<div class="grid">
+<a href="projects.html" class="card" style="text-decoration:none;color:inherit"><h3>🎯 Core Projects (P0-P12)</h3><div class="desc">285 tasks across 13 projects. Market research through sustainability.</div></a>
+<a href="tools.html" class="card" style="text-decoration:none;color:inherit;border-left-color:var(--rose)"><h3>🛠️ Execution Tools (P13-P22)</h3><div class="desc">10 ready-to-use tools: copy deck, trackers, scenarios, risks, dependencies.</div></a>
+<a href="gaps.html" class="card" style="text-decoration:none;color:inherit;border-left-color:#E65100"><h3>🔍 Gap Analysis (22 Gaps)</h3><div class="desc">22 gaps identified + remediated. 8 protocol sheets in parent workbooks.</div></a>
+<a href="articles.html" class="card" style="text-decoration:none;color:inherit;border-left-color:var(--rose)"><h3>📝 Blog Articles (6 SEO Posts)</h3><div class="desc">Ready-to-publish articles targeting women's running keywords. Copy to Shopify blog.</div></a>
+<a href="calculators.html" class="card" style="text-decoration:none;color:inherit;border-left-color:var(--sage)"><h3>🧮 Interactive Calculators (3)</h3><div class="desc">Unit economics, PPC budget, and launch countdown — all with live editable inputs.</div></a>
+<a href="shopify.html" class="card" style="text-decoration:none;color:inherit;border-left-color:var(--ocean)"><h3>🛍️ Shopify Page Templates (8)</h3><div class="desc">Homepage, product page, about, FAQ, size guide, shipping, returns, privacy — previewed in browser frames.</div></a>
+</div></div></div><footer><div class="container"><a href="https://zainakhan2.github.io/Retail_Ventures_Command_Center/">🏠 Retail Ventures Command Center</a> &middot; 
+<a href="index.html"><strong>StrideHer</strong> GTM</a> &middot; 22 Projects &middot; 285 Tasks &middot; 69 Deliverables &middot;
+<a href="articles.html">Blog</a> &middot; <a href="calculators.html">Calculators</a> &middot; <a href="shopify.html">Shopify Pages</a>
+ &middot;
+<a href="financials.html">Financials</a> &middot; <a href="projections.html">Projections</a> &middot; <a href="competitors.html">Competitors</a>
+</div></footer></body></html>

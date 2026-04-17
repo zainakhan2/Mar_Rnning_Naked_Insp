@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>PPC Budget Calculator — StrideHer GTM</title><link rel="stylesheet" href="_shared.css"></head><body><header><div class="header-inner">
+<a href="https://retailventurescc.netlify.app/" class="cc-link">🏠 Command Center</a><a href="index.html" class="logo">Stride<span>Her</span> GTM</a>
+<nav>
+<a href="index.html" class="">Dashboard</a>
+<a href="projects.html" class="">Projects</a>
+<a href="tools.html" class="">Tools</a>
+<a href="gaps.html" class="">Gaps</a>
+<span class="nav-divider"></span>
+<a href="articles.html" class="">Blog</a>
+<a href="calculators.html" class="active">Calculators</a>
+<a href="shopify.html" class="">Shopify</a>
+<a href="email-flows.html">Emails</a><a href="executive-summary.html">Summary</a></nav></div></header>
+<div class="container"><div class="breadcrumb"><a href="index.html">Dashboard</a> → <a href="calculators.html">Calculators</a> → PPC Budget</div>
+<div class="section">
+<div class="section-title">📊 PPC Budget Calculator</div>
+<div class="section-sub">Set your daily ad budget and performance targets to project monthly revenue, orders, and profit from paid advertising.</div>
+<div class="calc-card"><h3>📝 Ad Inputs</h3>
+<div class="input-group"><label>Meta Ads daily budget ($)</label><input type="number" id="metaBudget" value="15" step="1" oninput="ppcCalc()"></div>
+<div class="input-group"><label>Google Ads daily budget ($)</label><input type="number" id="googleBudget" value="13" step="1" oninput="ppcCalc()"></div>
+<div class="input-group"><label>Target ROAS (x)</label><input type="number" id="roas" value="2.5" step="0.1" oninput="ppcCalc()"></div>
+<div class="input-group"><label>Average order value ($)</label><input type="number" id="aov" value="34.99" step="0.01" oninput="ppcCalc()"></div>
+<div class="input-group"><label>Contribution margin per order ($)</label><input type="number" id="margin" value="17.48" step="0.01" oninput="ppcCalc()"></div>
+</div>
+<div class="result-grid" id="ppcResults"></div>
+<div class="calc-card"><h3>📅 6-Month Projection (at current inputs)</h3><table class="tbl"><thead><tr><th>Month</th><th>Ad Spend</th><th>Revenue</th><th>Orders</th><th>Gross Profit</th><th>Net After Ads</th></tr></thead><tbody id="ppcTable"></tbody></table></div>
+</div></div>
+<script>
+function ppcCalc(){
+  const mb=+document.getElementById('metaBudget').value, gb=+document.getElementById('googleBudget').value,
+    roas=+document.getElementById('roas').value, aov=+document.getElementById('aov').value,
+    margin=+document.getElementById('margin').value;
+  const dailySpend=mb+gb, monthlySpend=dailySpend*30.4;
+  const monthlyRev=monthlySpend*roas;
+  const monthlyOrders=Math.round(monthlyRev/aov);
+  const grossProfit=monthlyOrders*margin;
+  const netAfterAds=grossProfit-monthlySpend;
+  const cac=monthlyOrders>0?(monthlySpend/monthlyOrders):0;
+  document.getElementById('ppcResults').innerHTML=`
+    <div class="result-box"><div class="label">Monthly Ad Spend</div><div class="value" style="color:var(--rose)">$${monthlySpend.toFixed(0)}</div><div class="sub">$${dailySpend}/day × 30.4 days</div></div>
+    <div class="result-box"><div class="label">Monthly Revenue</div><div class="value">$${monthlyRev.toFixed(0)}</div><div class="sub">at ${roas}× ROAS</div></div>
+    <div class="result-box"><div class="label">Monthly Orders</div><div class="value">${monthlyOrders}</div><div class="sub">at $${aov} AOV</div></div>
+    <div class="result-box"><div class="label">CAC</div><div class="value ${cac>margin?'neg':''}">$${cac.toFixed(2)}</div><div class="sub">cost to acquire 1 customer</div></div>
+    <div class="result-box"><div class="label">Net Profit After Ads</div><div class="value ${netAfterAds<0?'neg':''}">${netAfterAds>=0?'$':'−$'}${Math.abs(netAfterAds).toFixed(0)}</div><div class="sub">/month</div></div>`;
+  let rows='';
+  for(let m=1;m<=6;m++){
+    const growth=1+(m-1)*0.1;
+    const mSpend=monthlySpend*growth, mRev=mSpend*roas, mOrd=Math.round(mRev/aov), mGP=mOrd*margin, mNet=mGP-mSpend;
+    rows+=`<tr><td>Month ${m}</td><td>$${mSpend.toFixed(0)}</td><td>$${mRev.toFixed(0)}</td><td>${mOrd}</td><td>$${mGP.toFixed(0)}</td><td style="color:${mNet>=0?'var(--sage)':'var(--rose)'};font-weight:600">${mNet>=0?'$':'−$'}${Math.abs(mNet).toFixed(0)}</td></tr>`;
+  }
+  document.getElementById('ppcTable').innerHTML=rows;
+}
+ppcCalc();
+</script><footer><div class="container"><a href="https://retailventurescc.netlify.app/">🏠 Retail Ventures Command Center</a> &middot; 
+<a href="index.html"><strong>StrideHer</strong> GTM</a> &middot; 22 Projects &middot; 285 Tasks &middot; 69 Deliverables &middot;
+<a href="articles.html">Blog</a> &middot; <a href="calculators.html">Calculators</a> &middot; <a href="shopify.html">Shopify Pages</a>
+ &middot;
+<a href="financials.html">Financials</a> &middot; <a href="projections.html">Projections</a> &middot; <a href="competitors.html">Competitors</a>
+</div></footer></body></html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Financial Dashboard — StrideHer GTM</title><link rel="stylesheet" href="_shared.css"></head><body><header><div class="header-inner">
+<a href="https://retailventurescc.netlify.app/" class="cc-link">🏠 Command Center</a>
+<a href="index.html" class="logo">Stride<span>Her</span> GTM</a>
+<nav>
+<a href="index.html" class="active">Dashboard</a>
+<a href="projects.html" class="">Projects</a>
+<a href="tools.html" class="">Tools</a>
+<a href="gaps.html" class="">Gaps</a>
+<span class="nav-divider"></span>
+<a href="articles.html" class="">Blog</a>
+<a href="calculators.html" class="">Calculators</a>
+<a href="shopify.html" class="">Shopify</a>
+<a href="email-flows.html">Emails</a>
+<a href="executive-summary.html">Summary</a>
+</nav></div></header>
+<div class="hero hero-sm" style="background:linear-gradient(135deg,var(--navy) 0%,#1a3a5c 50%,var(--sage) 100%)"><div class="container">
+<h1>💰 Financial <em>Dashboard</em></h1>
+<p>Interactive unit economics, monthly P&L model, and cash flow projection. All inputs are editable — change any assumption to see real-time impact across the entire model.</p>
+</div></div>
+<div class="container">
+
+<!-- UNIT ECONOMICS -->
+<div class="section">
+<div class="section-title">Unit Economics — Per Order Breakdown</div>
+<div class="section-sub">Edit any yellow input to recalculate margins in real time. Source: P7B, P0E.</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:24px">
+<div class="calc-card">
+<h3>📝 Revenue & Cost Inputs</h3>
+<div class="input-group"><label>Retail price</label><input type="number" id="fp" value="34.99" step="0.01" oninput="finCalc()"><span style="font-size:12px;color:var(--muted);margin-left:8px">per unit</span></div>
+<div class="input-group"><label>Product COGS</label><input type="number" id="fc" value="6.00" step="0.01" oninput="finCalc()"></div>
+<div class="input-group"><label>Inbound freight / unit</label><input type="number" id="ff" value="2.00" step="0.01" oninput="finCalc()"></div>
+<div class="input-group"><label>Packaging / unit</label><input type="number" id="fk" value="1.25" step="0.01" oninput="finCalc()"></div>
+<div class="input-group"><label>Outbound shipping</label><input type="number" id="fs" value="4.50" step="0.01" oninput="finCalc()"></div>
+<div class="input-group"><label>Payment processing %</label><input type="number" id="fpr" value="2.9" step="0.1" oninput="finCalc()"></div>
+<div class="input-group"><label>Monthly fixed costs</label><input type="number" id="fix" value="800" step="50" oninput="finCalc()"></div>
+<div class="input-group"><label>Monthly ad budget</label><input type="number" id="fad" value="850" step="50" oninput="finCalc()"></div>
+</div>
+<div>
+<div class="result-grid" id="finResults" style="margin-bottom:16px"></div>
+<div class="calc-card"><h3>📊 Cost Waterfall</h3><div id="finWaterfall"></div></div>
+</div>
+</div></div>
+
+<!-- MONTHLY P&L -->
+<div class="section">
+<div class="section-title">Monthly P&L Model — 12-Month View</div>
+<div class="section-sub">Based on moderate scenario (P7B baseline). Revenue grows 15-25% month-over-month. Green = profitable month.</div>
+<div style="overflow-x:auto">
+<table class="tbl" id="plTable">
+<thead><tr><th>Line Item</th><th>M1</th><th>M2</th><th>M3</th><th>M4</th><th>M5</th><th>M6</th><th>M7</th><th>M8</th><th>M9</th><th>M10</th><th>M11</th><th>M12</th><th>TOTAL</th></tr></thead>
+<tbody id="plBody"></tbody>
+</table></div></div>
+
+<!-- CASH FLOW -->
+<div class="section">
+<div class="section-title">Cash Position — Running Balance</div>
+<div class="section-sub">Starting capital: $10,000. The chart shows cumulative cash after all inflows and outflows each month.</div>
+<div class="calc-card">
+<canvas id="cashChart" width="900" height="300" style="width:100%;max-height:300px"></canvas>
+</div>
+<div style="margin-top:16px;font-size:13px;color:var(--muted)">
+<strong style="color:var(--sage)">Green zone:</strong> healthy (>$5K) &middot;
+<strong style="color:#E65100">Orange zone:</strong> caution ($2K-$5K) &middot;
+<strong style="color:var(--rose)">Red zone:</strong> critical (<$2K)
+</div>
+</div>
+
+<div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--mid)">
+<a href="projections.html" class="btn btn-primary">📊 3-Scenario Projections →</a>
+<a href="calc-unit-economics.html" class="btn btn-outline" style="margin-left:8px">🧮 Unit Economics Calculator</a>
+<a href="files/P7B_Financial_Planning.xlsx" class="btn btn-sage" style="margin-left:8px">📥 P7B Financial Planning</a>
+<a href="files/P15_Budget_KPI_Tracker.xlsx" class="btn btn-outline" style="margin-left:8px">📥 P15 KPI Tracker</a>
+</div>
+</div>
+
+<script>
+const grossRev=[1400,2100,2800,3500,4200,4900,5250,5600,6000,6400,6800,7200];
+const discRet=[280,315,336,350,378,392,394,392,390,384,374,360];
+
+function finCalc(){
+  const p=+document.getElementById('fp').value,c=+document.getElementById('fc').value,
+    fr=+document.getElementById('ff').value,pk=+document.getElementById('fk').value,
+    sh=+document.getElementById('fs').value,pr=+document.getElementById('fpr').value/100,
+    fix=+document.getElementById('fix').value,ad=+document.getElementById('fad').value;
+  const landed=c+fr+pk, proc=p*pr+0.30, contrib=p-landed-sh-proc;
+  const be=Math.ceil((fix+ad)/contrib);
+  const trueGM=((p-c)/p*100);
+  document.getElementById('finResults').innerHTML=`
+    <div class="result-box"><div class="label">Landed Cost</div><div class="value">$$${landed.toFixed(2)}</div><div class="sub">COGS + freight + packaging</div></div>
+    <div class="result-box"><div class="label">Contribution Margin</div><div class="value ${contrib<10?'neg':''}">$$${contrib.toFixed(2)}</div><div class="sub">${(contrib/p*100).toFixed(1)}% of retail</div></div>
+    <div class="result-box"><div class="label">True Gross Margin</div><div class="value">${trueGM.toFixed(1)}%</div><div class="sub">(price - COGS) / price</div></div>
+    <div class="result-box"><div class="label">Breakeven</div><div class="value">${be}</div><div class="sub">units/month</div></div>
+    <div class="result-box"><div class="label">Monthly Fixed</div><div class="value" style="color:var(--rose)">$$${fix}</div><div class="sub">Shopify + apps + tools</div></div>
+    <div class="result-box"><div class="label">Monthly Ads</div><div class="value" style="color:var(--rose)">$$${ad}</div><div class="sub">Meta + Google</div></div>`;
+
+  const items=[['Retail Price',p,'var(--ocean)'],['COGS',-c,'var(--rose)'],['Freight',-fr,'var(--rose)'],['Packaging',-pk,'var(--rose)'],['Shipping',-sh,'var(--rose)'],['Processing',-proc,'var(--rose)'],['= Contribution',contrib,contrib>0?'var(--sage)':'var(--rose)']];
+  document.getElementById('finWaterfall').innerHTML=items.map(([l,v,col])=>{
+    const w=Math.abs(v)/p*100;
+    return`<div class="wf-row"><span class="wf-label">${l}</span><span class="wf-bar" style="width:${w}%;background:${col}"></span><span class="wf-val">${v>=0?'$':'−$'}${Math.abs(v).toFixed(2)}</span></div>`;
+  }).join('');
+
+  // P&L table
+  let plHTML='';let totals=Array(14).fill(0);
+  const rows=[
+    ['Gross Revenue',grossRev.map(x=>x)],
+    ['Discounts/Returns',discRet.map(x=>-x)],
+    ['Net Revenue',grossRev.map((x,i)=>x-discRet[i])],
+    ['COGS',grossRev.map(x=>-Math.round(x*c/p))],
+    ['Freight',[-1200,0,0,0,0,-1200,0,0,0,0,0,-1200]],
+    ['Packaging',grossRev.map(x=>-Math.round(x*pk/p))],
+    ['Shipping',grossRev.map(x=>-Math.round(x*sh/p))],
+    ['Processing',grossRev.map(x=>-Math.round(x*pr))],
+    ['Gross Profit',null],
+    ['Shopify+Apps',Array(12).fill(-89)],
+    ['Meta Ads',[-150,-350,-450,-450,-450,-450,-450,-450,-450,-450,-450,-450]],
+    ['Google Ads',[0,-200,-350,-390,-390,-390,-390,-390,-390,-390,-390,-390]],
+    ['Other Fixed',Array(12).fill(-100)],
+    ['Net Profit',null],
+  ];
+  // Calculate gross profit and net profit
+  rows.forEach((r,ri)=>{
+    if(r[0]==='Gross Profit'){
+      r[1]=rows[2][1].map((nr,i)=>nr+rows[3][1][i]+rows[4][1][i]+rows[5][1][i]+rows[6][1][i]+rows[7][1][i]);
+    }
+    if(r[0]==='Net Profit'){
+      r[1]=rows[8][1].map((gp,i)=>gp+rows[9][1][i]+rows[10][1][i]+rows[11][1][i]+rows[12][1][i]);
+    }
+  });
+
+  rows.forEach(([label,vals])=>{
+    const isBold=['Net Revenue','Gross Profit','Net Profit'].includes(label);
+    const total=vals.reduce((a,b)=>a+b,0);
+    plHTML+=`<tr style="${isBold?'font-weight:700;background:var(--gray)':''}"><td>${label}</td>`;
+    vals.forEach(v=>{
+      const color=v<0?'var(--rose)':(label==='Net Profit'&&v>0?'var(--sage)':'inherit');
+      plHTML+=`<td style="text-align:right;color:${color}">$${v>=0?'':'-'}${Math.abs(v).toLocaleString()}</td>`;
+    });
+    const tc=total<0?'var(--rose)':(label==='Net Profit'&&total>0?'var(--sage)':'inherit');
+    plHTML+=`<td style="text-align:right;font-weight:700;color:${tc}">$${total>=0?'':'-'}${Math.abs(total).toLocaleString()}</td></tr>`;
+  });
+  document.getElementById('plBody').innerHTML=plHTML;
+
+  // Cash chart
+  const canvas=document.getElementById('cashChart');
+  const ctx=canvas.getContext('2d');
+  canvas.width=canvas.offsetWidth*2;canvas.height=600;
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  const netProfits=rows[13][1];
+  let cash=[10000];
+  // Pre-launch costs
+  cash[0]-=3600+1200+750; // inventory + freight + packaging upfront
+  for(let i=0;i<12;i++) cash.push(cash[i]+netProfits[i]);
+
+  const maxC=Math.max(...cash)*1.1,minC=Math.min(0,...cash);
+  const w=canvas.width,h=canvas.height,pad=60,gw=w-pad*2,gh=h-pad*2;
+
+  // Zones
+  ctx.fillStyle='rgba(226,239,218,0.3)';ctx.fillRect(pad,pad,gw,gh*(1-5000/(maxC-minC)));
+  ctx.fillStyle='rgba(255,243,224,0.3)';ctx.fillRect(pad,pad+gh*(1-5000/(maxC-minC)),gw,gh*(3000/(maxC-minC)));
+  ctx.fillStyle='rgba(252,228,236,0.2)';ctx.fillRect(pad,pad+gh*(1-2000/(maxC-minC)),gw,gh*(2000/(maxC-minC)));
+
+  // Grid
+  ctx.strokeStyle='#E2E2E2';ctx.lineWidth=1;
+  for(let i=0;i<=5;i++){const y=pad+gh*i/5;ctx.beginPath();ctx.moveTo(pad,y);ctx.lineTo(w-pad,y);ctx.stroke();
+    ctx.fillStyle='#9CA3AF';ctx.font='20px "DM Sans"';ctx.textAlign='right';
+    ctx.fillText('$'+Math.round(maxC-(maxC-minC)*i/5).toLocaleString(),pad-8,y+6);}
+
+  // Bars
+  const barW=gw/13*0.6;
+  const labels=['Pre','M1','M2','M3','M4','M5','M6','M7','M8','M9','M10','M11','M12'];
+  cash.forEach((c,i)=>{
+    const x=pad+gw/13*(i+0.5)-barW/2;
+    const barH=(c/(maxC-minC))*gh;
+    const y=pad+gh-barH;
+    ctx.fillStyle=c>5000?'#7A9A7E':c>2000?'#E65100':'#C07C7C';
+    ctx.beginPath();ctx.roundRect(x,y,barW,barH,4);ctx.fill();
+    ctx.fillStyle='#1B2A4A';ctx.font='bold 18px "Plus Jakarta Sans"';ctx.textAlign='center';
+    ctx.fillText('$'+Math.round(c/1000)+'K',x+barW/2,y-8);
+    ctx.fillStyle='#6B7280';ctx.font='16px "DM Sans"';
+    ctx.fillText(labels[i],x+barW/2,pad+gh+24);
+  });
+}
+finCalc();
+</script><footer><div class="container">
+<a href="https://retailventurescc.netlify.app/">🏠 Retail Ventures Command Center</a> &middot;
+<a href="index.html"><strong>StrideHer</strong> GTM</a> &middot; 22 Projects &middot; 285 Tasks &middot; 69 Deliverables &middot;
+<a href="financials.html">Financials</a> &middot; <a href="projections.html">Projections</a> &middot; <a href="competitors.html">Competitors</a>
+</div></footer></body></html>

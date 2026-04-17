@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Launch Countdown — StrideHer GTM</title><link rel="stylesheet" href="_shared.css"></head><body><header><div class="header-inner">
+<a href="https://retailventurescc.netlify.app/" class="cc-link">🏠 Command Center</a><a href="index.html" class="logo">Stride<span>Her</span> GTM</a>
+<nav>
+<a href="index.html" class="">Dashboard</a>
+<a href="projects.html" class="">Projects</a>
+<a href="tools.html" class="">Tools</a>
+<a href="gaps.html" class="">Gaps</a>
+<span class="nav-divider"></span>
+<a href="articles.html" class="">Blog</a>
+<a href="calculators.html" class="active">Calculators</a>
+<a href="shopify.html" class="">Shopify</a>
+<a href="email-flows.html">Emails</a><a href="executive-summary.html">Summary</a></nav></div></header>
+<div class="container"><div class="breadcrumb"><a href="index.html">Dashboard</a> → <a href="calculators.html">Calculators</a> → Launch Countdown</div>
+<div class="section">
+<div class="section-title">🚀 Launch Countdown</div>
+<div class="section-sub">Enter your target launch date to see a personalized week-by-week task timeline. Based on the P13 Quick-Start Guide.</div>
+<div class="calc-card"><h3>📅 Set Your Launch Date</h3>
+<div class="input-group"><label>Launch Date</label><input type="date" id="launchDate" onchange="countdown()"></div>
+<div id="countdownResult" style="margin-top:20px;font-family:var(--heading);font-size:48px;font-weight:800;color:var(--ocean);text-align:center"></div>
+</div>
+<div id="timeline"></div>
+</div></div>
+<script>
+const tasks=[
+  {week:-4,title:"Week -4: Legal Foundation",items:["Form Wyoming LLC + apply for EIN","File trademark application ($250)","Set up Wave accounting","Build unit economics model"],color:"var(--rose)"},
+  {week:-3,title:"Week -3: Product + Store",items:["Contact suppliers + send RFQ","Open Mercury bank account","Set up Shopify + Dawn theme","Configure payments + install analytics"],color:"var(--rose)"},
+  {week:-2,title:"Week -2: Content + Community",items:["Approve sample + place 600-unit PO","Create 4 legal pages","Set up Instagram + TikTok","Batch-create 20 content pieces","Launch email waitlist"],color:"var(--rose)"},
+  {week:-1,title:"Week -1: Final Prep",items:["Build fulfillment station","Write fulfillment SOP","Ship 5-10 influencer packages","Set up Meta + Google ads (drafts)","Install Judge.me"],color:"var(--rose)"},
+  {week:0,title:"Week 0: Pre-Launch",items:["Receive + inspect inventory","Stock fulfillment shelving","Process 3 test orders","Send pre-launch email sequence","Run 27-point QA checklist"],color:"#E65100"},
+  {week:1,title:"Week 1: LAUNCH 🚀",items:["Remove password + send launch email","Activate Meta ads","Fulfill all orders same-day","Respond to every support email","Post daily on IG + TikTok"],color:"var(--sage)"},
+  {week:2,title:"Week 2: Optimize",items:["First weekly KPI review","Activate Google Ads","Respond to first reviews","Inventory reconciliation"],color:"var(--sage)"},
+  {week:4,title:"Week 3-4: Rhythm",items:["Continue KPI reviews","First A/B test","2nd influencer wave","Attend local parkrun"],color:"var(--sage)"},
+  {week:8,title:"Week 5-8: Scale",items:["Monthly financial review","Launch Amazon listing","Set up TikTok Shop","Create VIP segment","Wholesale one-sheet + outreach"],color:"var(--ocean)"},
+  {week:12,title:"Week 9-12: Compound",items:["Day 45 cross-sell email flow","Apply to race expos","Mine reviews for ad copy","Compile operations manual","Write 3-year vision"],color:"var(--ocean)"},
+];
+function countdown(){
+  const launch=new Date(document.getElementById('launchDate').value);
+  const today=new Date(); today.setHours(0,0,0,0); launch.setHours(0,0,0,0);
+  const diff=Math.ceil((launch-today)/(1000*60*60*24));
+  document.getElementById('countdownResult').innerHTML=diff>0?`${diff} days until launch`:`Launched ${Math.abs(diff)} days ago`;
+  let html='';
+  tasks.forEach(t=>{
+    const taskDate=new Date(launch); taskDate.setDate(taskDate.getDate()+t.week*7);
+    const isPast=taskDate<today;
+    const isCurrent=Math.abs((taskDate-today)/(1000*60*60*24))<7;
+    html+=`<div class="calc-card" style="border-left:4px solid ${t.color};opacity:${isPast?.5:1};${isCurrent?'box-shadow:0 0 0 2px var(--ocean)':''}">
+      <h3 style="color:${t.color}">${t.title}</h3>
+      <div style="font-size:12px;color:var(--muted);margin-bottom:8px">📅 ${taskDate.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})} ${isPast?'✅ Past':isCurrent?'⬅️ THIS WEEK':''}</div>
+      <ul style="margin:0;padding-left:18px;font-size:13px;line-height:1.8">${t.items.map(i=>`<li>${i}</li>`).join('')}</ul></div>`;
+  });
+  document.getElementById('timeline').innerHTML=html;
+}
+// Set default to 30 days from now
+const d=new Date();d.setDate(d.getDate()+30);
+document.getElementById('launchDate').value=d.toISOString().split('T')[0];
+countdown();
+</script><footer><div class="container"><a href="https://retailventurescc.netlify.app/">🏠 Retail Ventures Command Center</a> &middot; 
+<a href="index.html"><strong>StrideHer</strong> GTM</a> &middot; 22 Projects &middot; 285 Tasks &middot; 69 Deliverables &middot;
+<a href="articles.html">Blog</a> &middot; <a href="calculators.html">Calculators</a> &middot; <a href="shopify.html">Shopify Pages</a>
+ &middot;
+<a href="financials.html">Financials</a> &middot; <a href="projections.html">Projections</a> &middot; <a href="competitors.html">Competitors</a>
+</div></footer></body></html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Shopify Theme Config — StrideHer GTM</title><link rel="stylesheet" href="_shared.css"></head><body>
+<header><div class="header-inner">
+<a href="https://retailventurescc.netlify.app/" class="cc-link">🏠 Command Center</a>
+<a href="index.html" class="logo">Stride<span>Her</span> GTM</a>
+<nav>
+<a href="index.html">Dashboard</a>
+<a href="projects.html">Projects</a>
+<a href="tools.html">Tools</a>
+<a href="gaps.html">Gaps</a>
+<span class="nav-divider"></span>
+<a href="articles.html">Blog</a>
+<a href="calculators.html">Calculators</a>
+<a href="shopify.html" class="active">Shopify</a>
+<a href="email-flows.html">Emails</a>
+<a href="executive-summary.html">Summary</a>
+</nav></div></header>
+
+<div class="container"><div class="breadcrumb"><a href="index.html">Dashboard</a> → <a href="shopify.html">Shopify Pages</a> → Theme Configuration</div></div>
+
+<div class="hero hero-sm" style="background:linear-gradient(135deg,var(--ocean),var(--rose))"><div class="container">
+<h1>⚙️ Shopify Dawn <em>Theme Config</em></h1>
+<p>Copy-paste these settings into your Dawn theme to auto-apply StrideHer brand colors, fonts, announcement bar, and layout. No manual customization needed — just paste and save.</p>
+</div></div>
+
+<div class="container">
+
+<div class="section">
+<div class="section-title">How to Apply This Configuration</div>
+<div class="section-sub">3 steps, 5 minutes, and your store looks like the brand board.</div>
+<div class="calc-card">
+<h3>Step 1: Open Theme Editor</h3>
+<p style="font-size:14px;margin-bottom:12px">Shopify Admin → <strong>Online Store</strong> → <strong>Themes</strong> → <strong>Dawn</strong> → <strong>Customize</strong></p>
+
+<h3>Step 2: Apply Settings</h3>
+<p style="font-size:14px;margin-bottom:12px">In the theme editor, click <strong>Theme settings</strong> (gear icon at bottom-left). Then apply each section below by navigating to the matching section in theme settings.</p>
+
+<h3>Step 3: Apply Liquid Code</h3>
+<p style="font-size:14px;margin-bottom:8px">For advanced customizations (custom CSS, announcement bar styling): go to <strong>Online Store</strong> → <strong>Themes</strong> → <strong>⋯</strong> → <strong>Edit code</strong> → find <code>base.css</code> or <code>custom.css</code> and paste the CSS provided below.</p>
+</div></div>
+
+<div class="section">
+<div class="section-title">1. Color Settings</div>
+<div class="section-sub">Theme Settings → Colors. Apply these exact hex codes.</div>
+<div class="calc-card">
+<h3>Scheme 1 (Primary — used on most pages)</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:12px 0">
+<div style="padding:14px;border-radius:8px;border:1px solid var(--mid)"><strong style="font-size:12px;color:var(--muted)">Background</strong><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="width:24px;height:24px;border-radius:4px;background:#FFFFFF;border:1px solid #ddd"></div><code style="font-size:13px">#FFFFFF</code></div></div>
+<div style="padding:14px;border-radius:8px;border:1px solid var(--mid)"><strong style="font-size:12px;color:var(--muted)">Text</strong><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="width:24px;height:24px;border-radius:4px;background:#1B1B1B"></div><code style="font-size:13px">#1B1B1B</code></div></div>
+<div style="padding:14px;border-radius:8px;border:1px solid var(--mid)"><strong style="font-size:12px;color:var(--muted)">Solid button / Primary accent</strong><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="width:24px;height:24px;border-radius:4px;background:#C07C7C"></div><code style="font-size:13px">#C07C7C</code> <span style="font-size:11px;color:var(--muted)">Desert Rose</span></div></div>
+<div style="padding:14px;border-radius:8px;border:1px solid var(--mid)"><strong style="font-size:12px;color:var(--muted)">Outline button</strong><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="width:24px;height:24px;border-radius:4px;background:#3D5A80"></div><code style="font-size:13px">#3D5A80</code> <span style="font-size:11px;color:var(--muted)">Deep Ocean</span></div></div>
+<div style="padding:14px;border-radius:8px;border:1px solid var(--mid)"><strong style="font-size:12px;color:var(--muted)">Shadow / Secondary accent</strong><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="width:24px;height:24px;border-radius:4px;background:#7A9A7E"></div><code style="font-size:13px">#7A9A7E</code> <span style="font-size:11px;color:var(--muted)">Alpine Sage</span></div></div>
+</div>
+
+<h3 style="margin-top:20px">Scheme 2 (Dark — used for header/footer/announcement bar)</h3>
+<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin:12px 0">
+<div style="padding:14px;border-radius:8px;border:1px solid var(--mid)"><strong style="font-size:12px;color:var(--muted)">Background</strong><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="width:24px;height:24px;border-radius:4px;background:#1B2A4A"></div><code style="font-size:13px">#1B2A4A</code> <span style="font-size:11px;color:var(--muted)">Navy</span></div></div>
+<div style="padding:14px;border-radius:8px;border:1px solid var(--mid)"><strong style="font-size:12px;color:var(--muted)">Text</strong><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="width:24px;height:24px;border-radius:4px;background:#FFFFFF;border:1px solid #ddd"></div><code style="font-size:13px">#FFFFFF</code></div></div>
+<div style="padding:14px;border-radius:8px;border:1px solid var(--mid)"><strong style="font-size:12px;color:var(--muted)">Accent</strong><div style="display:flex;align-items:center;gap:8px;margin-top:4px"><div style="width:24px;height:24px;border-radius:4px;background:#C07C7C"></div><code style="font-size:13px">#C07C7C</code></div></div>
+</div>
+</div></div>
+
+<div class="section">
+<div class="section-title">2. Typography Settings</div>
+<div class="section-sub">Theme Settings → Typography.</div>
+<div class="calc-card">
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+<div>
+<h3>Heading Font</h3>
+<p style="font-size:14px;margin:8px 0"><strong>Font family:</strong> Plus Jakarta Sans</p>
+<p style="font-size:14px"><strong>If not available in Dawn:</strong> select <code>Assistant</code> (closest Google Font available in Shopify) or upload Plus Jakarta Sans as a custom font via Settings → Files</p>
+<p style="font-size:14px;margin-top:8px"><strong>Font size scale:</strong> 100% (default)</p>
+<div style="font-family:'Plus Jakarta Sans',sans-serif;font-size:28px;font-weight:800;color:var(--navy);margin-top:12px;letter-spacing:-0.5px">StrideHer Heading</div>
+</div>
+<div>
+<h3>Body Font</h3>
+<p style="font-size:14px;margin:8px 0"><strong>Font family:</strong> DM Sans</p>
+<p style="font-size:14px"><strong>If not available in Dawn:</strong> select <code>Assistant</code> or <code>Karla</code> as alternatives</p>
+<p style="font-size:14px;margin-top:8px"><strong>Font size scale:</strong> 100% (default)</p>
+<div style="font-family:'DM Sans',sans-serif;font-size:16px;color:var(--text);margin-top:12px;line-height:1.7">This is body text. Clean, readable, and warm. Line height 1.7 for comfortable reading.</div>
+</div>
+</div></div></div>
+
+<div class="section">
+<div class="section-title">3. Layout & Spacing</div>
+<div class="section-sub">Theme Settings → Layout.</div>
+<div class="calc-card">
+<table class="tbl" style="max-width:600px">
+<thead><tr><th>Setting</th><th>Value</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td><strong>Page width</strong></td><td>1200px</td><td>Standard D2C width — not too wide, not cramped</td></tr>
+<tr><td><strong>Spacing between sections</strong></td><td>36px</td><td>Clean breathing room between content blocks</td></tr>
+<tr><td><strong>Grid style</strong></td><td>Default</td><td>Dawn's default grid is clean and responsive</td></tr>
+<tr><td><strong>Border radius</strong></td><td>8px (buttons) / 0px (inputs)</td><td>Slightly rounded buttons, sharp inputs — modern and intentional</td></tr>
+</tbody></table>
+</div></div>
+
+<div class="section">
+<div class="section-title">4. Header Settings</div>
+<div class="section-sub">Theme Editor → Header section.</div>
+<div class="calc-card">
+<table class="tbl" style="max-width:600px">
+<thead><tr><th>Setting</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td><strong>Logo</strong></td><td>Upload StrideHer wordmark (Plus Jakarta Sans Bold, Deep Ocean #3D5A80 on transparent)</td></tr>
+<tr><td><strong>Logo width</strong></td><td>120px</td></tr>
+<tr><td><strong>Color scheme</strong></td><td>Scheme 2 (Dark / Navy background)</td></tr>
+<tr><td><strong>Sticky header</strong></td><td>ON (shows on scroll up)</td></tr>
+<tr><td><strong>Menu</strong></td><td>Main menu: Shop, About, Size Guide, FAQ, Blog</td></tr>
+</tbody></table>
+</div></div>
+
+<div class="section">
+<div class="section-title">5. Announcement Bar</div>
+<div class="section-sub">Theme Editor → Add section → Announcement bar (above header).</div>
+<div class="calc-card">
+<table class="tbl" style="max-width:600px">
+<thead><tr><th>Setting</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td><strong>Text</strong></td><td>🏃‍♀️ Free US Shipping on All Orders | 30-Day Money-Back Guarantee</td></tr>
+<tr><td><strong>Color scheme</strong></td><td>Scheme 2 (Dark) or custom: background #C07C7C (Rose), text #FFFFFF</td></tr>
+<tr><td><strong>Link</strong></td><td>/products/strideher-running-belt</td></tr>
+</tbody></table>
+<div style="margin-top:12px;background:#C07C7C;color:white;text-align:center;padding:8px 16px;border-radius:6px;font-size:13px;font-weight:500">
+🏃‍♀️ Free US Shipping on All Orders | 30-Day Money-Back Guarantee
+</div>
+</div></div>
+
+<div class="section">
+<div class="section-title">6. Footer Settings</div>
+<div class="section-sub">Theme Editor → Footer section.</div>
+<div class="calc-card">
+<table class="tbl" style="max-width:600px">
+<thead><tr><th>Setting</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td><strong>Color scheme</strong></td><td>Scheme 2 (Dark / Navy)</td></tr>
+<tr><td><strong>Show payment icons</strong></td><td>ON (Visa, MC, PayPal, Apple Pay, Shop Pay)</td></tr>
+<tr><td><strong>Newsletter signup</strong></td><td>ON — "Join the StrideHer community"</td></tr>
+<tr><td><strong>Menu columns</strong></td><td>Column 1: Shop, Size Guide, FAQ<br>Column 2: About, Contact, Blog<br>Column 3: Shipping, Returns, Privacy, Terms</td></tr>
+<tr><td><strong>Social links</strong></td><td>Instagram: @strideher | TikTok: @strideher</td></tr>
+</tbody></table>
+</div></div>
+
+<div class="section">
+<div class="section-title">7. Custom CSS — Paste into base.css</div>
+<div class="section-sub">Online Store → Themes → ⋯ → Edit code → Assets → base.css (add at the very bottom).</div>
+<div class="calc-card" style="background:var(--navy);color:white;font-family:monospace;font-size:12px;line-height:1.8;white-space:pre-wrap;overflow-x:auto">/* =============================================
+   STRIDEHER BRAND CUSTOMIZATIONS — Dawn Theme
+   Paste at the bottom of base.css
+   ============================================= */
+
+/* Brand Colors as CSS Variables */
+:root {
+  --strideher-rose: #C07C7C;
+  --strideher-sage: #7A9A7E;
+  --strideher-ocean: #3D5A80;
+  --strideher-navy: #1B2A4A;
+  --strideher-black: #1B1B1B;
+}
+
+/* Add to Cart Button — Desert Rose */
+.product-form__submit {
+  background-color: var(--strideher-rose) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: 8px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.5px;
+  transition: background-color 0.3s;
+}
+.product-form__submit:hover {
+  background-color: #a86868 !important;
+}
+
+/* Trust badges section under ATC */
+.product__description .trust-badges {
+  display: flex;
+  gap: 16px;
+  font-size: 12px;
+  color: #6B7280;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+/* Announcement bar — Rose background */
+.announcement-bar {
+  background-color: var(--strideher-rose) !important;
+  color: #FFFFFF !important;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Header — Navy background */
+.header {
+  background-color: var(--strideher-navy) !important;
+}
+.header a {
+  color: rgba(255,255,255,0.8) !important;
+}
+.header a:hover {
+  color: #FFFFFF !important;
+}
+
+/* Footer — Navy background */
+.footer {
+  background-color: var(--strideher-navy) !important;
+}
+
+/* Product title styling */
+.product__title h1 {
+  font-weight: 800 !important;
+  letter-spacing: -0.5px;
+  color: var(--strideher-navy);
+}
+
+/* Price styling */
+.price-item--regular {
+  font-weight: 800 !important;
+  font-size: 24px !important;
+  color: var(--strideher-navy) !important;
+}
+
+/* Size variant buttons */
+.product-form__input label {
+  border-radius: 6px !important;
+  border-width: 2px !important;
+  font-weight: 600 !important;
+}
+.product-form__input label:hover,
+.product-form__input label.active {
+  border-color: var(--strideher-ocean) !important;
+}
+
+/* Collection card hover effect */
+.card:hover .card__media img {
+  transform: scale(1.03);
+  transition: transform 0.4s ease;
+}
+
+/* Newsletter section in footer */
+.footer__newsletter .field__input {
+  border-radius: 6px 0 0 6px !important;
+}
+.footer__newsletter .field__button {
+  background: var(--strideher-rose) !important;
+  border-radius: 0 6px 6px 0 !important;
+}
+
+/* Blog card styling */
+.blog-articles .card {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Mobile optimizations */
+@media screen and (max-width: 749px) {
+  .product-form__submit {
+    font-size: 16px !important;
+    padding: 14px !important;
+  }
+  .announcement-bar {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+}</div>
+<div style="margin-top:12px">
+<button onclick="navigator.clipboard.writeText(document.querySelector('.calc-card[style*=navy]').textContent.trim());this.textContent='✓ Copied!';setTimeout(()=>this.textContent='📋 Copy CSS',2000)" class="btn btn-primary" style="cursor:pointer">📋 Copy CSS</button>
+</div>
+</div>
+
+<div class="section">
+<div class="section-title">8. Product Page Template Settings</div>
+<div class="section-sub">Theme Editor → Products → Default product → configure each section.</div>
+<div class="calc-card">
+<table class="tbl">
+<thead><tr><th>Section</th><th>Setting</th><th>Value</th></tr></thead>
+<tbody>
+<tr><td><strong>Product media</strong></td><td>Desktop layout</td><td>Stacked (images stack vertically on left, info on right)</td></tr>
+<tr><td></td><td>Image ratio</td><td>Adapt to image</td></tr>
+<tr><td></td><td>Enable video autoplay</td><td>ON (if using product demo video)</td></tr>
+<tr><td><strong>Product info</strong></td><td>Enable sticky info</td><td>ON (ATC button stays visible while scrolling images)</td></tr>
+<tr><td><strong>Buy buttons</strong></td><td>Show dynamic checkout</td><td>ON (Apple Pay / Shop Pay express buttons)</td></tr>
+<tr><td></td><td>Show quantity selector</td><td>OFF (single-item product — quantity adds friction)</td></tr>
+<tr><td><strong>Collapsible tabs</strong></td><td>Add rows for:</td><td>Shipping Info, Size Guide, Materials, Care Instructions</td></tr>
+<tr><td><strong>Reviews</strong></td><td>Judge.me widget</td><td>Place below product description (Judge.me auto-inserts)</td></tr>
+</tbody></table>
+</div></div>
+
+<div style="margin-top:20px;padding-top:16px;border-top:1px solid var(--mid)">
+<a href="shopify.html" class="btn btn-outline">← Shopify Pages</a>
+<a href="shopify-product.html" class="btn btn-primary" style="margin-left:8px">🛍️ Product Page Preview</a>
+<a href="files/P21_Visual_Brand_Board.xlsx" class="btn btn-sage" style="margin-left:8px">📥 P21 Brand Board</a>
+</div>
+</div>
+
+<footer><div class="container">
+<a href="https://retailventurescc.netlify.app/">🏠 Retail Ventures Command Center</a> &middot;
+<a href="index.html"><strong>StrideHer</strong> GTM</a> &middot; 22 Projects &middot; 285 Tasks &middot; 69 Deliverables &middot;
+<a href="financials.html">Financials</a> &middot; <a href="projections.html">Projections</a> &middot; <a href="competitors.html">Competitors</a>
+</div></footer>
+</body></html>

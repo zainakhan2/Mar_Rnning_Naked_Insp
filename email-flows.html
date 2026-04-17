@@ -1,0 +1,107 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Email Flow Previews — StrideHer GTM</title><link rel="stylesheet" href="_shared.css"></head><body><header><div class="header-inner">
+<a href="https://retailventurescc.netlify.app/" class="cc-link">🏠 Command Center</a>
+<a href="index.html" class="logo">Stride<span>Her</span> GTM</a>
+<nav>
+<a href="index.html" class="active">Dashboard</a>
+<a href="projects.html" class="">Projects</a>
+<a href="tools.html" class="">Tools</a>
+<a href="gaps.html" class="">Gaps</a>
+<span class="nav-divider"></span>
+<a href="articles.html" class="">Blog</a>
+<a href="calculators.html" class="">Calculators</a>
+<a href="shopify.html" class="">Shopify</a>
+</nav></div></header>
+<div class="hero hero-sm" style="background:linear-gradient(135deg,var(--navy),var(--rose))"><div class="container">
+<h1>📧 Email Flow <em>Previews</em></h1>
+<p>Visual preview of all 7 Klaviyo flows (18 emails + discount codes). Click a flow tab to see the sequence with subject lines, triggers, and content previews.</p>
+</div></div>
+<div class="container"><div class="section">
+<div id="tabs"></div>
+<div class="flow-meta" id="meta"></div>
+<div class="flow-pipe" id="pipe"></div>
+<div style="margin-top:24px">
+<a href="files/P14_CopyDeck.xlsx" class="btn btn-primary">📥 Full Copy Deck (all email text)</a>
+<a href="files/P4B_Email_Marketing_Automation.xlsx" class="btn btn-outline" style="margin-left:8px">📥 P4B Klaviyo Setup</a>
+</div>
+</div></div>
+<script>
+const flows={
+welcome:{name:'Welcome Series',count:3,trigger:'Email signup / site visit',disc:'WELCOME10 (10% off)',
+emails:[
+{num:'W1',subj:'Welcome to StrideHer 🏃‍♀️',prev:'The belt that gets it.',trigger:'Immediately',
+body:'Brand introduction, founder story, what makes StrideHer different (contoured fit, 3 pockets, hidden period pocket). Warm, personal tone.',cta:'Shop Now'},
+{num:'W2',subj:'The pocket nobody else thought to include',prev:'Designed for what you actually carry.',trigger:'Day 2',
+body:'Deep dive into the hidden period pocket, 3-pocket organization, gel pocket magnetic snap. Product education with personality.',cta:'Shop Now'},
+{num:'W3',subj:'Join us? Your code is waiting →',prev:'WELCOME10 for 10% off.',trigger:'Day 5',
+body:'10% discount code, 3 customer testimonial quotes, urgency (code expires in 7 days), social proof.',cta:'Use Code: WELCOME10',code:'WELCOME10'}
+]},
+postpurchase:{name:'Post-Purchase',count:3,trigger:'After order placed',disc:'Referral: Give $5, Get $5',
+emails:[
+{num:'PP1',subj:'Your StrideHer is on its way! 🎉',prev:'Here\'s what to expect.',trigger:'Order confirmed',
+body:'Shipping details, delivery timeline, first-run tips (adjust on high hip, 2" below belly button), personal founder sign-off.',cta:'Track Order'},
+{num:'PP2',subj:'How was your first run in it?',prev:'We\'d love to hear.',trigger:'Day 7',
+body:'Check-in, sizing help offer (free exchanges), care instructions, hidden pocket reminder, UGC request (tag @strideher).',cta:'Leave a Review'},
+{num:'PP3',subj:'A quick favor? (30 seconds)',prev:'Your honest review helps other runners.',trigger:'Day 14',
+body:'Review request (1-click star rating via Judge.me), referral program introduction (give $5, get $5), unique referral link.',cta:'Leave a Review',code:'Referral Link'}
+]},
+cart:{name:'Abandoned Cart',count:3,trigger:'Cart abandoned (1hr, 24hr, 72hr)',disc:'COMEBACK10 in email 3',
+emails:[
+{num:'AC1',subj:'You left something behind 🏃‍♀️',prev:'Your StrideHer is waiting.',trigger:'1 hour',
+body:'Cart reminder, saved cart link, trust badges (free shipping, 30-day guarantee, free exchanges). No discount — just a nudge.',cta:'Complete Order'},
+{num:'AC2',subj:'Still thinking about it?',prev:'Here\'s what runners love most.',trigger:'24 hours',
+body:'3 customer review quotes, competitor comparison angle, benefit reminder (3 pockets, zero bounce). Social proof focus.',cta:'Complete Order'},
+{num:'AC3',subj:'Last nudge: 10% off your StrideHer',prev:'Use code COMEBACK10.',trigger:'72 hours',
+body:'10% discount as final incentive, scarcity mention, 48-hour code expiration, 30-day guarantee reminder.',cta:'Use Code: COMEBACK10',code:'COMEBACK10'}
+]},
+crosssell:{name:'Day 45 Cross-Sell',count:2,trigger:'45 days after first purchase',disc:'Bundle discount',
+emails:[
+{num:'CS1',subj:'Your StrideHer needs a running buddy 🏃‍♀️🏃‍♀️',prev:'Save $10 on a 2-pack.',trigger:'Day 45',
+body:'Cross-sell the 2-belt bundle ($59.99 vs $69.98). "One for training, one for race day." Or gift a running friend. Social proof.',cta:'Shop 2-Pack — Save $10'},
+{num:'CS2',subj:'Different color, same confidence',prev:'Add a second StrideHer to your rotation.',trigger:'Day 52',
+body:'Color showcase (4 colors), benefits of rotation (one for training, one for race day), last nudge.',cta:'Shop Colors'}
+]},
+winback:{name:'Win-Back',count:3,trigger:'No purchase in 60+ days',disc:'COMEBACK15 (15% off)',
+emails:[
+{num:'WB1',subj:'We miss you at the start line 🏁',prev:'It\'s been a while.',trigger:'Day 60',
+body:'Gentle re-engagement. New blog content links, community update, what\'s new at StrideHer.',cta:'See What\'s New'},
+{num:'WB2',subj:'15% off — just for you',prev:'Code: COMEBACK15',trigger:'Day 90',
+body:'Exclusive discount, new colors (if applicable), top customer reviews compilation.',cta:'Shop with 15% Off',code:'COMEBACK15'},
+{num:'WB3',subj:'Should we stop emailing?',prev:'Just say the word.',trigger:'Day 120',
+body:'Respectful opt-out offer, one-click preference update, "we\'ll miss you" tone. Cleans list.',cta:'Stay Subscribed'}
+]},
+vip:{name:'VIP Loyalty',count:2,trigger:'2+ orders or $60+ lifetime',disc:'Early access + VIP15',
+emails:[
+{num:'VIP1',subj:'You\'re officially a StrideHer VIP 🏆',prev:'Thank you for being one of our top runners.',trigger:'VIP threshold',
+body:'Recognition, VIP status explanation (early access, exclusive offers, founder updates), VIP15 permanent code.',cta:'Explore VIP Perks',code:'VIP15'},
+{num:'VIP2',subj:'VIPs get first look 👀',prev:'Before anyone else sees it.',trigger:'New product launch',
+body:'Early access to new products/colors, VIP-exclusive 24hr window, behind-the-scenes founder note.',cta:'Shop First'}
+]},
+sunset:{name:'Sunset (List Hygiene)',count:2,trigger:'No opens in 90+ days',disc:'None',
+emails:[
+{num:'SS1',subj:'Are we still friends? 🤔',prev:'We noticed you haven\'t opened our emails.',trigger:'90 days no open',
+body:'Re-engagement ask, click-to-stay CTA, brief reminder of what StrideHer emails contain (tips, offers, community).',cta:'Yes, Keep Sending!'},
+{num:'SS2',subj:'Goodbye (for now) 👋',prev:'We\'re removing you from our list.',trigger:'7 days after SS1',
+body:'Final farewell, auto-unsubscribe, "changed your mind?" resubscribe link. Maintains list health + deliverability.',cta:'Wait — Keep Me!'}
+]}
+};
+let active="welcome";
+function renderTabs(){
+  document.getElementById("tabs").innerHTML=Object.entries(flows).map(([k,f])=>`<button class="flow-tab ${k===active?'active':''}" onclick="setFlow('${k}')">${f.name} (${f.count})</button>`).join("");
+}
+function setFlow(k){active=k;renderTabs();renderFlow();}
+function renderFlow(){
+  const f=flows[active];
+  document.getElementById("meta").innerHTML=`<div class="row"><span>Trigger:</span> <strong>${f.trigger}</strong> <span style="margin-left:16px">Emails:</span> <strong>${f.count}</strong> <span style="margin-left:16px">Discount:</span> <strong>${f.disc}</strong></div>`;
+  document.getElementById("pipe").innerHTML=f.emails.map((e,i)=>{
+    const arrow=i<f.emails.length-1?'<div class="flow-arrow">→</div>':"";
+    const code=e.code?`<div class="code-box">${e.code}</div>`:"";
+    return`<div class="email-card"><div class="eh"><div class="num">${e.num}</div><div class="subj">${e.subj}</div><div class="prev">${e.prev}</div></div><div class="eb"><div class="trigger">⏱ ${e.trigger}</div><div class="body">${e.body}</div><div class="cta-btn">${e.cta}</div>${code}</div></div>${arrow}`;
+  }).join("");
+}
+renderTabs();renderFlow();
+</script><footer><div class="container">
+<a href="https://retailventurescc.netlify.app/">🏠 Retail Ventures Command Center</a> &middot;
+<a href="index.html"><strong>StrideHer</strong> GTM</a> &middot; 22 Projects &middot; 285 Tasks &middot; 69 Deliverables &middot;
+<a href="articles.html">Blog</a> &middot; <a href="calculators.html">Calculators</a> &middot; <a href="shopify.html">Shopify</a> &middot;
+<a href="financials.html">Financials</a> &middot; <a href="projections.html">Projections</a> &middot; <a href="competitors.html">Competitors</a>
+</div></footer></body></html>

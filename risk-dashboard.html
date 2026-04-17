@@ -1,0 +1,267 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Risk Dashboard — StrideHer GTM</title><link rel="stylesheet" href="_shared.css"></head><body><header><div class="header-inner">
+<a href="https://retailventurescc.netlify.app/" class="cc-link">🏠 Command Center</a>
+<a href="index.html" class="logo">Stride<span>Her</span> GTM</a>
+<nav>
+<a href="index.html" class="active">Dashboard</a>
+<a href="projects.html" class="">Projects</a>
+<a href="tools.html" class="">Tools</a>
+<a href="gaps.html" class="">Gaps</a>
+<span class="nav-divider"></span>
+<a href="tracker.html">Tracker</a>
+<a href="all-tasks.html">Tasks</a>
+<a href="articles.html" class="">Blog</a>
+<a href="files-page.html">Files</a>
+</nav></div></header>
+<div class="hero hero-sm" style="background:linear-gradient(135deg,var(--navy),#8B0000)"><div class="container">
+<h1>⚠️ Risk <em>Dashboard</em></h1>
+<p>20 risks on a 5×5 probability × impact matrix. Filterable by category and severity. Each risk has a documented mitigation plan.</p>
+</div></div>
+<div class="container"><div class="section">
+<div style="display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap">
+<select id="riskFilter" onchange="filterRisks()" style="padding:8px 14px;border:1.5px solid var(--mid);border-radius:6px;font-size:13px;font-family:var(--font)">
+<option value="all">All Risks (20)</option>
+<option value="HIGH">🔴 HIGH (4)</option>
+<option value="MED">🟡 MEDIUM (11)</option>
+<option value="LOW">🟢 LOW (5)</option>
+</select>
+<select id="catFilter" onchange="filterRisks()" style="padding:8px 14px;border:1.5px solid var(--mid);border-radius:6px;font-size:13px;font-family:var(--font)">
+<option value="all">All Categories</option>
+<option value="Supply Chain">Supply Chain</option>
+<option value="Manufacturing">Manufacturing</option>
+<option value="Financial">Financial</option>
+<option value="Launch">Launch</option>
+<option value="Marketing">Marketing</option>
+<option value="Legal">Legal</option>
+<option value="Operations">Operations</option>
+</select>
+<span id="riskCount" style="font-size:13px;color:var(--muted);font-weight:600;align-self:center">20 risks</span>
+</div>
+<div style="display:flex;gap:16px;margin-bottom:20px;flex-wrap:wrap">
+<div class="result-box" style="flex:1;min-width:120px"><div class="label">HIGH</div><div class="value neg">4</div></div>
+<div class="result-box" style="flex:1;min-width:120px"><div class="label">MEDIUM</div><div class="value" style="color:#E65100">11</div></div>
+<div class="result-box" style="flex:1;min-width:120px"><div class="label">LOW</div><div class="value">5</div></div>
+<div class="result-box" style="flex:1;min-width:120px"><div class="label">Avg Score</div><div class="value" style="color:var(--ocean)">7.2</div></div>
+</div>
+<div style="overflow-x:auto"><table class="tbl">
+<thead><tr><th>ID</th><th>Risk</th><th>Category</th><th>Prob</th><th>Impact</th><th>Score</th><th>Level</th><th>Mitigation Plan</th><th>Docs</th></tr></thead>
+<tbody id="riskBody"><tr class="risk-row" data-level="HIGH" data-cat="Supply Chain">
+<td style="font-weight:700;color:var(--ocean)">R1</td>
+<td><strong>Inventory Stockout</strong></td>
+<td>Supply Chain</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center;font-weight:700;color:var(--rose)">16</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FCE4EC;color:var(--rose)">HIGH</span></td>
+<td style="font-size:12px">Reorder at 338 units (42/SKU). Monitor weekly. Air freight bridge ($300-500) if ocean freight delayed.</td>
+<td style="font-size:11px;color:var(--muted)">P3D, P10CD</td>
+</tr><tr class="risk-row" data-level="HIGH" data-cat="Manufacturing">
+<td style="font-weight:700;color:var(--ocean)">R2</td>
+<td><strong>Supplier Quality Failure</strong></td>
+<td>Manufacturing</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center;font-weight:700;color:var(--rose)">15</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FCE4EC;color:var(--rose)">HIGH</span></td>
+<td style="font-size:12px">AQL 2.5/4.0 pre-shipment inspection. Backup supplier identified. Reject lot if >2.5% major defects.</td>
+<td style="font-size:11px;color:var(--muted)">P3B, P2E</td>
+</tr><tr class="risk-row" data-level="HIGH" data-cat="Financial">
+<td style="font-weight:700;color:var(--ocean)">R3</td>
+<td><strong>Cash Flow Crunch</strong></td>
+<td>Financial</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center;font-weight:700;color:var(--rose)">12</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FCE4EC;color:var(--rose)">HIGH</span></td>
+<td style="font-size:12px">$2K contingency reserve. Monthly cash review. Pause ads if cash <$2K. Negotiate Net-60 with suppliers.</td>
+<td style="font-size:11px;color:var(--muted)">P7B, G4</td>
+</tr><tr class="risk-row" data-level="HIGH" data-cat="Launch">
+<td style="font-weight:700;color:var(--ocean)">R4</td>
+<td><strong>Launch Week <5 Orders</strong></td>
+<td>Launch</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center;font-weight:700;color:var(--rose)">12</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FCE4EC;color:var(--rose)">HIGH</span></td>
+<td style="font-size:12px">Activate G3 Launch Rescue Protocol. Diagnose: traffic? conversion? targeting? Price test $29.99 for 2 weeks.</td>
+<td style="font-size:11px;color:var(--muted)">P6E, G3</td>
+</tr><tr class="risk-row" data-level="MED" data-cat="Shipping">
+<td style="font-weight:700;color:var(--ocean)">R5</td>
+<td><strong>Customs Delay</strong></td>
+<td>Shipping</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center;font-weight:700;color:#E65100">9</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF3E0;color:#E65100">MED</span></td>
+<td style="font-size:12px">HS code 4202.92 pre-verified. Cargo insurance $48. Freight forwarder handles docs. Buffer 10 days in timeline.</td>
+<td style="font-size:11px;color:var(--muted)">P3C</td>
+</tr><tr class="risk-row" data-level="MED" data-cat="Reputation">
+<td style="font-weight:700;color:var(--ocean)">R6</td>
+<td><strong>Negative Reviews</strong></td>
+<td>Reputation</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center;font-weight:700;color:#E65100">8</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF3E0;color:#E65100">MED</span></td>
+<td style="font-size:12px">Respond within 48 hours. Exchange-first protocol. Mine negatives for v2 improvements. Target <5% return rate.</td>
+<td style="font-size:11px;color:var(--muted)">P9A, P9B</td>
+</tr><tr class="risk-row" data-level="MED" data-cat="Marketing">
+<td style="font-weight:700;color:var(--ocean)">R7</td>
+<td><strong>Meta Ad Account Ban</strong></td>
+<td>Marketing</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center;font-weight:700;color:#E65100">8</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF3E0;color:#E65100">MED</span></td>
+<td style="font-size:12px">Backup Google PMax campaign. Organic content (15 blog articles) drives traffic independently. Diversify to TikTok Shop.</td>
+<td style="font-size:11px;color:var(--muted)">P6C, P6D</td>
+</tr><tr class="risk-row" data-level="MED" data-cat="Competitive">
+<td style="font-weight:700;color:var(--ocean)">R8</td>
+<td><strong>Competitor Launches Women-Specific</strong></td>
+<td>Competitive</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center;font-weight:700;color:#E65100">6</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF3E0;color:#E65100">MED</span></td>
+<td style="font-size:12px">First-mover advantage: reviews, SEO authority, community. Accelerate review velocity. File trademark for positioning phrases.</td>
+<td style="font-size:11px;color:var(--muted)">P0A, P8B</td>
+</tr><tr class="risk-row" data-level="MED" data-cat="Supply Chain">
+<td style="font-weight:700;color:var(--ocean)">R9</td>
+<td><strong>Freight Cost Spike</strong></td>
+<td>Supply Chain</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center;font-weight:700;color:#E65100">6</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF3E0;color:#E65100">MED</span></td>
+<td style="font-size:12px">Monitor Freightos index. Pre-book freight rates when possible. Air freight bridge for emergency restocks.</td>
+<td style="font-size:11px;color:var(--muted)">P3C</td>
+</tr><tr class="risk-row" data-level="MED" data-cat="Operations">
+<td style="font-weight:700;color:var(--ocean)">R10</td>
+<td><strong>Founder Burnout</strong></td>
+<td>Operations</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center;font-weight:700;color:#E65100">9</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF3E0;color:#E65100">MED</span></td>
+<td style="font-size:12px">Week -4 to Week 12 structured plan reduces decision fatigue. Hire VA at 10+ orders/day. Monthly self-assessment.</td>
+<td style="font-size:11px;color:var(--muted)">P13</td>
+</tr><tr class="risk-row" data-level="LOW" data-cat="Legal">
+<td style="font-weight:700;color:var(--ocean)">R11</td>
+<td><strong>Product Recall</strong></td>
+<td>Legal</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center;font-weight:700;color:var(--sage)">5</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#E2EFDA;color:var(--sage)">LOW</span></td>
+<td style="font-size:12px">G6 Product Recall Protocol: contain → investigate → notify → remediate. Product liability insurance $300-500/yr.</td>
+<td style="font-size:11px;color:var(--muted)">P8D, G6</td>
+</tr><tr class="risk-row" data-level="LOW" data-cat="Legal">
+<td style="font-weight:700;color:var(--ocean)">R12</td>
+<td><strong>Data Breach</strong></td>
+<td>Legal</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center;font-weight:700;color:var(--sage)">4</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#E2EFDA;color:var(--sage)">LOW</span></td>
+<td style="font-size:12px">G5 Data Breach Response: contain → assess → notify → remediate → document. Shopify handles PCI compliance.</td>
+<td style="font-size:11px;color:var(--muted)">P8C, G5</td>
+</tr><tr class="risk-row" data-level="LOW" data-cat="IP">
+<td style="font-weight:700;color:var(--ocean)">R13</td>
+<td><strong>Trademark Opposition</strong></td>
+<td>IP</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center;font-weight:700;color:var(--sage)">4</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#E2EFDA;color:var(--sage)">LOW</span></td>
+<td style="font-size:12px">USPTO search clear. "StrideHer" has no conflicts. Budget $500-1000 for opposition response if challenged.</td>
+<td style="font-size:11px;color:var(--muted)">P1A, P8B</td>
+</tr><tr class="risk-row" data-level="MED" data-cat="Channel">
+<td style="font-weight:700;color:var(--ocean)">R14</td>
+<td><strong>Amazon Listing Suppressed</strong></td>
+<td>Channel</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center;font-weight:700;color:#E65100">6</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF3E0;color:#E65100">MED</span></td>
+<td style="font-size:12px">Brand Registry protects listing. Backup Shopify DTC channel. Maintain 100% policy compliance. No incentivized reviews.</td>
+<td style="font-size:11px;color:var(--muted)">P4E</td>
+</tr><tr class="risk-row" data-level="MED" data-cat="Product">
+<td style="font-weight:700;color:var(--ocean)">R15</td>
+<td><strong>Size Guide Inaccuracy</strong></td>
+<td>Product</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center;font-weight:700;color:#E65100">6</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF3E0;color:#E65100">MED</span></td>
+<td style="font-size:12px">Free exchange policy absorbs sizing errors. Update guide based on first 50 orders. Track exchange reasons.</td>
+<td style="font-size:11px;color:var(--muted)">P2D, P9D</td>
+</tr><tr class="risk-row" data-level="LOW" data-cat="Marketing">
+<td style="font-weight:700;color:var(--ocean)">R16</td>
+<td><strong>Influencer Non-Performance</strong></td>
+<td>Marketing</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center;font-weight:700;color:var(--sage)">4</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#E2EFDA;color:var(--sage)">LOW</span></td>
+<td style="font-size:12px">Gifting agreement (no payment until post). Wave approach: 5-10 per wave. Only scale with performers.</td>
+<td style="font-size:11px;color:var(--muted)">P5A, P8D</td>
+</tr><tr class="risk-row" data-level="MED" data-cat="Revenue">
+<td style="font-weight:700;color:var(--ocean)">R17</td>
+<td><strong>Seasonal Demand Drop</strong></td>
+<td>Revenue</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center;font-weight:700;color:#E65100">6</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF3E0;color:#E65100">MED</span></td>
+<td style="font-size:12px">Q4 holiday gift marketing. Year-round race calendar. Content marketing drives non-seasonal traffic.</td>
+<td style="font-size:11px;color:var(--muted)">P11A, P22</td>
+</tr><tr class="risk-row" data-level="LOW" data-cat="Financial">
+<td style="font-weight:700;color:var(--ocean)">R18</td>
+<td><strong>Platform Fee Increases</strong></td>
+<td>Financial</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center;font-weight:700;color:var(--sage)">4</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#E2EFDA;color:var(--sage)">LOW</span></td>
+<td style="font-size:12px">Multi-channel reduces dependency. DTC margins absorb fee increases. Monitor competitor pricing response.</td>
+<td style="font-size:11px;color:var(--muted)">P7B</td>
+</tr><tr class="risk-row" data-level="MED" data-cat="Operations">
+<td style="font-weight:700;color:var(--ocean)">R19</td>
+<td><strong>Supply Chain Disruption</strong></td>
+<td>Operations</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center;font-weight:700;color:#E65100">8</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF3E0;color:#E65100">MED</span></td>
+<td style="font-size:12px">G7: dual sourcing, document readiness, freight insurance. 3 scenarios: factory offline, freight delay, customs hold.</td>
+<td style="font-size:11px;color:var(--muted)">P10CD, G7</td>
+</tr><tr class="risk-row" data-level="MED" data-cat="Growth">
+<td style="font-weight:700;color:var(--ocean)">R20</td>
+<td><strong>Channel Underperformance</strong></td>
+<td>Growth</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center;font-weight:700;color:#E65100">6</td>
+<td><span style="font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;background:#FFF3E0;color:#E65100">MED</span></td>
+<td style="font-size:12px">G8: triple-fail test + rescue protocol. Reallocate budget to performing channels within 2 weeks.</td>
+<td style="font-size:11px;color:var(--muted)">P11B, G8</td>
+</tr></tbody>
+</table></div>
+<div style="margin-top:16px"><a href="files/P17_Risk_Register.xlsx" class="btn btn-primary">📥 P17 Risk Register</a></div>
+</div></div>
+<script>
+function filterRisks(){
+  const level=document.getElementById('riskFilter').value;
+  const cat=document.getElementById('catFilter').value;
+  let count=0;
+  document.querySelectorAll('.risk-row').forEach(r=>{
+    const show=(level==='all'||r.dataset.level===level)&&(cat==='all'||r.dataset.cat===cat);
+    r.style.display=show?'':'none';
+    if(show)count++;
+  });
+  document.getElementById('riskCount').textContent=count+' risks';
+}
+</script><footer><div class="container">
+<a href="https://retailventurescc.netlify.app/">🏠 Retail Ventures Command Center</a> &middot;
+<a href="index.html"><strong>StrideHer</strong> GTM</a> &middot;
+<a href="tracker.html">Tracker</a> &middot; <a href="all-tasks.html">Tasks</a> &middot; <a href="files-page.html">Files</a> &middot; <a href="pitch-deck.html">Pitch Deck</a> &middot; <a href="brand-guidelines.html">Brand</a> &middot; <a href="risk-dashboard.html">Risks</a>
+</div></footer></body></html>
